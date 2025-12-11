@@ -20,3 +20,6 @@ Environment errors (invalid, unusable without change) should Throw, and be handl
 User errors should throw only if invalid. We don't replace with defaults.
 
 
+Custom error type: ConfigError inherit from std::exception, overriding the what() func
+Listing the above
+
