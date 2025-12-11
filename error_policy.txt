@@ -1,0 +1,22 @@
+by Theodor Rydberg and Sebastian Saastamoinen
+
+
+1 Config Constructor, Throw exceptions
+Missing file (environment, throw missing file exception)
+Can't read file (environment, throw bad read permissions?)
+Wrong file type? (environment, throw bad file type (.txt) )
+
+bad properties
+- Can't be got (environment, throw can't be got)
+- Invalid value/range (user error, throw ...)
+
+Width & height have to be positive range, above 0
+Title have any valid string
+
+
+To generalize:
+Programmer errors should be Asserted and rewritten
+Environment errors (invalid, unusable without change) should Throw, and be handled by call stack
+User errors should throw only if invalid. We don't replace with defaults.
+
+
