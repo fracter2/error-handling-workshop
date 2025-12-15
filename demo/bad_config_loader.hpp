@@ -13,9 +13,19 @@ struct Config {
     Config(const std::string& path); // Throws ConfigErr on fail
 };
 
+// TODO Add enum, or make children exceptions 
+enum class ConfigErrType {
+    MissingFile,
+    ParseError,
+    InvalidInput,
+    MissingInput,
+    WrongFileType
+};
+
 struct ConfigErr : public std::exception {
 private:
     std::string message;
+
 public:
 
     // Constructor accepting const char*
