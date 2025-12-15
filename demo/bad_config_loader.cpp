@@ -27,10 +27,23 @@ std::string parse_string(std::ifstream& stream) {
 }
 
 void load_config(const std::string& path, std::ifstream& stream) {
-    stream.open(path); // can throw
+    if (!path.find(".txt")) {
+        throw ConfigErr("Wrong file extension, expected .txt");
+    }
+
+    stream.open(path);
     if (!stream.is_open()) {
+        throw ConfigErr("Could not open file, missing or lacking permission");
+    }
+
+    if (stream.eof()) {
+        throw ConfigErr("file is empty");
+    }
+
+    if (!stream.good()) {
         throw ConfigErr("Could not open file");
     }
+
 }
 
 Config::Config(const std::string& path) {
