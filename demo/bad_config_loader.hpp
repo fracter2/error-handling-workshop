@@ -2,6 +2,8 @@
 #include <string>
 #include <string_view>
 #include <exception>
+#include <optional>
+#include <span>
 
 struct Config {
     int width;

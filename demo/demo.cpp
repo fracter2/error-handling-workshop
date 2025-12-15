@@ -7,21 +7,23 @@ using namespace std::string_view_literals;
 int main(){
     std::println("Error Handling Workshop - demo program");
 
-    const std::string path = "data/config_ok.txt";
+    const std::string path = "../data/config_ok.txt";
+    
 
-    if(!load_config(path)){
-        std::println("load_config returned false.\nUsing whatever g_config was set to.");
+    try {
+        Config conf(path);
+
+        std::println("Config:");
+        std::println("  width:  {}", conf.width);
+        std::println("  height:  {}", conf.height);
+        std::println("  title:  {}", conf.title);
     }
-
-    std::println("Config:");
-    std::println("  width:  {}", g_config.width);
-    std::println("  height:  {}", g_config.height);
-    std::println("  title:  {}", g_config.title);    
-
-    // TODO in the workshop:
-    // - Remove g_config.
-    // - Change main() to use your new API.
-    // - Handle errors explicitly here.
+    catch (ConfigErr e) {
+        std::println("  Config error:  {}", e.what());
+    }
+    catch (std::exception e) {
+        std::println("  unknown error:  {}", e.what());
+    }
 
     return 0;
 }
