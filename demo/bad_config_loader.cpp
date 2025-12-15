@@ -3,12 +3,25 @@
 #include <fstream>
 #include <iostream>
 
-// NOTE FOR STUDENTS: This file is intentionally poor. Your task is to redesign
-// the error handling API and implementation of the config loader to make it robust, 
-// easy to use and idiomatic.
 
-// Intentionally global. Students should remove this.
-Config g_config{800, 600, "Default Title"};
+int parse_int(std::ifstream& stream) { 
+
+}
+    
+    
+std::string parse_string(std::ifstream& stream) {
+
+
+
+}
+
+void load_config(const std::string& path, std::ifstream& stream) {
+
+}
+
+Config::Config(const std::string& path) {
+
+}
 
 // Very naive, intentionally poor implementation.
 // - Uses a global Config.
