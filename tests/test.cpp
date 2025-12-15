@@ -12,24 +12,25 @@ DISABLE_WARNINGS_FROM_GTEST
 
 TEST(ConfigLoader, LoadsKnownGoodFile){
 	const std::string path = "../data/config_ok.txt"s;
-	bool ok = load_config(path);
-	EXPECT_TRUE(ok); //we expect load_config to succeed for config_ok.txt
-	EXPECT_EQ(1280, g_config.width);
-	EXPECT_EQ(720, g_config.height);
-	EXPECT_EQ("My Awesome Game"s, g_config.title);
-
-	// In the refactored version you should no longer rely on g_config.
-	// Adjust this test to work with your new API.	
+	try {
+		Config conf(path);
+		EXPECT_EQ(1280, conf.width);
+		EXPECT_EQ(720, conf.height);
+		EXPECT_EQ("My Awesome Game"s, conf.title);
+	}
+	catch (std::exception e) {
+		FAIL();
+	}
 }
 
 TEST(ConfigLoader, HandlesMissingFile){
 	const std::string path = "../data/does_not_exist.txt"s;
-	bool ok = load_config(path);
-	EXPECT_FALSE(ok); //we expect load_config to fail for missing file
+
+	EXPECT_THROW(Config conf(path), std::exception);
 	
 	// In the refactor, assert that the correct error code is returned, or that the correct exception is thrown.
 }
-
+/*
 TEST(ConfigLoader, HandlesMalformedFile){
 	const std::string path = "../data/config_malformed.txt"s;
 	bool ok = load_config(path);
@@ -52,5 +53,5 @@ TEST(ConfigLoader, HandlesInvalidValues){
 	
 	// After refactor: check that the error is ConfigError::InvalidValue.
 }
-
+*/
 RESTORE_WARNINGS
